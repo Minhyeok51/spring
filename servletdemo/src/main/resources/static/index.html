@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Index.html Page</h1>
+    <ul>
+    	<li><a href="/demo1">demo1</a></li>
+    	<li><a href="/demo2?id=abc&name=def">demo2</a></li>
+    	<li><a href="/servletRequest">servletRequest</a></li>
+    </ul>
+    <!--get : url경로에 name값들이 다 들어감  / post : 경로만들어가고 form데이터는 payload에 담겨있음 -->
+    <form action="/formRequest" method = "post">
+    	<input type ="text" name="id">
+    	<input type ="text" name="name">
+    	<input type ="number" name="age">
+    	<button type = "submit">formRequest</button>
+    </form>
+</body>
+</html>
