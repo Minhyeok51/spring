@@ -44,7 +44,7 @@ public class testMain {
 		String num ="asbx";
 		System.out.println(num.length());
 		
-		
+		//텍스트 추가 
 		
 		
 	}
