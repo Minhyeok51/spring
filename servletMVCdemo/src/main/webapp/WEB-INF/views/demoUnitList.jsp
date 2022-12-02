@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+	pageEncoding="UTF-8"%>
 <%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> --%>
 <%@ page import="java.util.*"%>
 <%@ page import="example.demo002.servletMVCdemo.dto.*"%>
@@ -24,7 +24,7 @@
 	<%
 	List<DemoUnit> unitList = (ArrayList<DemoUnit>) request.getAttribute("unitList");
 	for (DemoUnit du : unitList) {
-		out.println("¹øÈ£: "+du.getNo() + " " + "¾ÆÀÌµð: "+du.getId() + " " + "ÀÌ¸§: "+du.getName());
+		out.println("ï¿½ï¿½È£: "+du.getNo() + " " + "ï¿½ï¿½ï¿½Ìµï¿½: "+du.getId() + " " + "ï¿½Ì¸ï¿½: "+du.getName());
 		out.println("<br/>");
 	}
 	%>
