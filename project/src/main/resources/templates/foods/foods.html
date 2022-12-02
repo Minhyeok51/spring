@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<a href="/foods">foods페이지</a>
+	</div>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>FoodId</th>
+					<th>FoodItemName</th>
+					<th>FoodContent</th>
+					<th>FoodPrice</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>음식1</td>
+					<td>재료1</td>
+					<td>1000</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>음식2</td>
+					<td>재료2</td>
+					<td>2000</td>
+				</tr>
+				<tr th:each="food : ${foods}">
+					<td><a th:href="@{|/foods/${food.id}|}"  th:text="${food.id}">3</a></td>
+					<td th:text="${food.itemName}">음식3</td>
+					<td th:text="${food.content}">재료3</td>
+					<td th:text="${food.price}">3000</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<div>
+		<button th:onclick="|location.href='@{/foods/new}'|" >신규등록</button>
+	</div>
+</body>
+</html>
