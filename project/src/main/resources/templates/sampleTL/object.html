@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- xml name space -->
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	request, response, session, locale
+<!-- 	<ul>
+		<li th:text="${#request}"></li>
+		<li th:text="${request}"></li>
+		<li th:text="${#response}"></li>
+		<li th:text="${#session}"></li>
+		<li th:text="${#locale}"></li>
+	</ul> -->
+	
+	<ul>
+		<li th:text="${param.param1}"></li>
+		<li th:text="${param.param2}"></li>
+	</ul>
+</body>
+</html>

@@ -32,7 +32,7 @@
 					<td>재료2</td>
 					<td>2000</td>
 				</tr>
-				<tr th:each="food : ${foods}">
+				<tr th:each="food : ${foods}">	<!-- th:each 반복문이다 for문 같은 -->
 					<td><a th:href="@{|/foods/${food.id}|}"  th:text="${food.id}">3</a></td>
 					<td th:text="${food.itemName}">음식3</td>
 					<td th:text="${food.content}">재료3</td>

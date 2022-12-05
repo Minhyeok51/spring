@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>update FoodItem Page</h1>
+	
+	<form action="" method="post">
+		<div>
+			<label>Id<input type="text" name="id" readonly="readonly" th:value="${food.id}"></label>
+			<label>ItemName<input type="text" name="itemName" th:value="${food.itemName}"></label>
+			<label>Content<input type="text" name="content" th:value="${food.content}"></label>
+			<label>Price<input type="number" name="price" th:value="${food.price}"></label>
+		</div>
+		<div>
+			<button type="submit">수정하기</button>
+			<button type="button" th:onclick="|location.href='@{/foods}'|">뒤로가기</button>
+		</div>
+	</form>
+</body>
+</html>
