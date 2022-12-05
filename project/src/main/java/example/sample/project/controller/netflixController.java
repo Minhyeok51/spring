@@ -38,13 +38,13 @@ public class netflixController {
 		model.addAttribute("movieList", movieList);
 		return "movie/home";
 	}
-	@GetMapping("/{movieNum}")
-	public String food(Model model, @PathVariable("movieNum") int movieNum) {
-		FoodItem foodItem = foodRepository.selectById(movieNum);
-		model.addAttribute("food", foodItem);
-		
-		return "foods/food";
-	}
+//	@GetMapping("/{movieNum}")
+//	public String food(Model model, @PathVariable("movieNum") int movieNum) {
+//		FoodItem foodItem = foodRepository.selectById(movieNum);
+//		model.addAttribute("food", foodItem);
+//		
+//		return "foods/food";
+//	}
 	@GetMapping("/home/{movieNum}")
 	public String movieInfo(@ModelAttribute Movie movieItem,Model model) {
 		model.addAttribute("movie",movieItem);
