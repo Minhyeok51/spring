@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- xml name space -->
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Basic Html Page</h1>
+	<p th:text="${test}">기본 텍스트</p>
+	긴 문장을 작성하는 중간에 여기 위체서 변수값을 출력<span th:text="${test}"></span> 하도록 한다
+	<br>
+	가나다라[[${test}]]마바사
+	
+	<br>
+	<p th:text="${boldtest}"></p>
+	<p th:utext="${boldtest}"></p>
+	
+	[[${boldtest}]]
+	[(${boldtest})]
+	
+	<div>
+		<p th:inline="none">[[]]</p>[[${boldtest}]]
+		<p th:inline="none">[()]</p>[(${boldtest})]
+	</div>
+	
+	<div>
+		<p th:text="${foodItem1.itemName}"></p>
+		<p th:text="${foodItem1.content}"></p>
+		<p th:text="${foodItem1.price}"></p>
+	</div>
+	
+	<div>
+		<p th:text="${foodItem2['itemName']}"></p>
+		<p th:text="${foodItem2.getContent()}"></p>
+		<p th:text="${foodItem2.price}"></p>
+	</div>
+	
+	<div>
+		<p th:text="${foods[0].itemName}"></p>
+	</div>
+	
+	<div>
+		<p th:text="${foods}"></p>
+		<ul th:each="food : ${foods}">
+			<li th:text="${food.itemName}"></li>
+			<li th:text="${food.content}"></li>
+			<li th:text="${food.price}"></li>
+		</ul>
+	</div>
+	
+	<!-- th:with 태그 범위 내에서 지역변수로 사용하는 변수 localVal-->
+	<div th:with="localVal=${foods[1]}">
+	<ul>
+		<li th:text="${localVal.itemName}"></li>
+		<li th:text="${localVal.content}"></li>
+		<li th:text="${localVal.price}"></li>
+	</ul>
+	</div>
+</body>
+</html>

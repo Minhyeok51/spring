@@ -36,6 +36,7 @@ public class FoodRepository {
 	public List<FoodItem> selectAll() {
 		return db;
 	}
+	
 	public boolean update(int id, FoodItem foodItem) {
 		boolean result = false;
 		try {
@@ -49,6 +50,7 @@ public class FoodRepository {
 		}
 		return result;
 	}
+	
 	public void deleteAll() {
 		db.clear();
 	}

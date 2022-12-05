@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Title</h1>
+	<ul th:each="movie : ${movieList}">
+		<a style="cursor:pointer" th:onclick="|location.href='@{/netflix/movieInfo/{movieNum}(movieNum=${movie.mNum})}'|"><li th:text="${movie.mName}" ></li></a>
+	</ul>
+</body>
+</html>
