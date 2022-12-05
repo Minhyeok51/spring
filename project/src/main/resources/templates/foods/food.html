@@ -30,8 +30,9 @@
 		</table>
 	</div>
 	
-	<div>
-		<button onclick="" >수정하기</button>
+	<div>											
+							<!--{foodId}(foodId=${food.id}) -printf와 비슷 앞에 양식을 넣어두고 뒤에서 정의를 해줌  -->		
+		<button th:onclick="|location.href='@{/foods/update/{foodId}(foodId=${food.id})}'|" >수정하기</button>
 		<button th:onclick="|location.href='@{/foods}'|" >리스트</button>
 	</div>
 </body>
