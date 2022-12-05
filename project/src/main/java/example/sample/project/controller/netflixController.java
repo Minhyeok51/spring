@@ -14,7 +14,9 @@ import example.sample.project.domain.FoodItem;
 import example.sample.project.domain.Movie;
 import example.sample.project.repository.FoodRepository;
 import example.sample.project.repository.MovieRepository;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 @RequestMapping("/netflix")
 public class netflixController {
@@ -26,8 +28,11 @@ public class netflixController {
 	@GetMapping("/home")
 	public String home(Model model) {
 		Movie movie1 = new Movie("공조");
+		movieRepository.insert(movie1);
 		Movie movie2 = new Movie("아바타");
+		movieRepository.insert(movie2);
 		Movie movie3 = new Movie("올빼미");
+		movieRepository.insert(movie3);
 		
 		List<Movie> movieList = new ArrayList<Movie>();
 		movieList.add(movie1);
@@ -45,9 +50,12 @@ public class netflixController {
 //		
 //		return "foods/food";
 //	}
-	@GetMapping("/home/{movieNum}")
-	public String movieInfo(@ModelAttribute Movie movieItem,Model model) {
-		model.addAttribute("movie",movieItem);
-		return "movie/movieInfo/{movieNum}";
+	@GetMapping("/movieInfo/{movieNum}")
+	public String movieInfo(@ModelAttribute Movie movieItem,Model model,
+			@PathVariable("movieNum") int movieNum) {
+		log.info("번호: " + movieNum);
+		Movie movie = movieRepository.selectById(movieNum);
+		model.addAttribute("movie",movie);
+		return "movie/movieInfo";
 	}
 }
