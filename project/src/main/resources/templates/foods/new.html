@@ -9,7 +9,7 @@
 										<!--th:object 오브젝트타입 설정해놓기  -->
 	<form action="" method="post" th:object="${foodItem}">
 		<div>
-<!-- 			object안에있는 itemName ... th:field값이 name, id, value값 설정해줌-->
+<!-- 			object안에있는 itemName ... th:field값이 name, id, value값에도 설정됨-->
 			<label>ItemName<input type="text" name="originalItemName" th:field="*{itemName}"></label>
 			<label>Content<input type="text" name="originalContent" th:field="*{content}"></label>
 			<label>Price<input type="number" name="originalPrice" th:field="*{price}"></label>

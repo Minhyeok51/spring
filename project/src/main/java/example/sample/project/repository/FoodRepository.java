@@ -46,7 +46,10 @@ public class FoodRepository {
 		targetFoodItem.setPrice(foodItem.getPrice());
 		targetFoodItem.setSoldout(foodItem.getSoldout());
 		result = true;
-		//FoodItem필드추
+		//FoodItem 필드추가
+		//화면에서 Input처리
+		//>>전달받는 부분 @ModelAttribute -> 알아서 필드 맵핑
+		//Controller -> Repository update
 		}catch (Exception e) {
 			// TODO: handle exception
 		}

@@ -26,7 +26,7 @@
 					<td th:text="${food.itemName}">음식3</td>
 					<td th:text="${food.content}">재료3</td>
 					<td th:text="${food.price}">3000</td>
-					<td><input type="checkbox"  th:text="${food.soldout}" readonly="readonly" disabled></td>
+					<td><input type="checkbox"  th:field="${food.soldout}" readonly="readonly" disabled></td>
 				</tr>
 			</tbody>
 		</table>
