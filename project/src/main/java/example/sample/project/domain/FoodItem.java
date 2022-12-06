@@ -1,5 +1,7 @@
 package example.sample.project.domain;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -14,6 +16,10 @@ public class FoodItem {
 	private String content;
 	private int price;
 	
+	private Boolean soldout;
+	private List<String> options;
+	
+	public FoodItem() {}
 	public FoodItem(String itemName, String content, int price) {
 		super();
 		this.itemName = itemName;

@@ -44,7 +44,9 @@ public class FoodRepository {
 		targetFoodItem.setItemName(foodItem.getItemName());
 		targetFoodItem.setContent(foodItem.getContent());
 		targetFoodItem.setPrice(foodItem.getPrice());
+		targetFoodItem.setSoldout(foodItem.getSoldout());
 		result = true;
+		//FoodItem필드추
 		}catch (Exception e) {
 			// TODO: handle exception
 		}

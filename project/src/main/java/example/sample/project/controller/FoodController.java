@@ -1,6 +1,8 @@
 package example.sample.project.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,7 +51,8 @@ public class FoodController {
 		return "foods/food";
 	}
 	@GetMapping("/new")
-	public String newFood() {
+	public String newFood(Model model) {
+		model.addAttribute("foodItem", new FoodItem());
 		return "foods/new";
 	}
 	
@@ -58,6 +61,8 @@ public class FoodController {
 	public String newFoodInsertModel(@ModelAttribute FoodItem foodItem
 //								,Model model
 								,RedirectAttributes rAttr) {
+		log.info(foodItem.toString());
+		
 		foodRepository.insert(foodItem);
 		
 //		model.addAttribute("food", foodItem);
@@ -97,6 +102,7 @@ public class FoodController {
 					, @PathVariable("foodId") int foodId
 					, @ModelAttribute FoodItem foodItem) {
 		log.info("/update/{}",foodId);
+		log.info(foodItem.toString());
 		foodRepository.update(foodId, foodItem);
 		
 		//1번.
@@ -106,6 +112,18 @@ public class FoodController {
 		//2번.
 		//food상세정보를 보여주는 경로가 이미 존재. ->이미 존재하는 메소드를 활용
 		return "redirect:/foods/{foodId}";
+	}
+	
+//	메서드명 위에 붙는 ModelAttribute 
+	@ModelAttribute("options")
+	public Map<String, String> options(){
+		Map<String, String> options= new HashMap<>();
+		
+		options.put("1번", "탄수화물");
+		options.put("2번", "단백질");
+		options.put("3번", "지방");
+		
+		return options;
 	}
 	@PostConstruct //생성자 불린후 그 다음에 밑에 메소드 실행해 주는 어노테이션
 	public void insertInit() {

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- xml name space -->
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>comments html page</h1>
+
+	<span>text</span>
+	<!-- <span>text</span>  -->
+	
+	<span th:text="${text}">text</span>
+<!--/*-->
+	<span th:text="${text}">text</span>  이부분도 날라간다
+<!--*/-->
+
+<!--/*/ <span th:text="${text}">text</span> 주석인데 타임리프 동작은 할수 있는 주석임 서버타고 들어왔을때만 나오고 파일로열었을댄 안나옴/*/-->
+	<br>
+	[[${text}]]
+<!-- 	[[${text}]] 주석처리했음에도 타임리프기능은 작동함 -->
+<!--/* 	[[${text}]] 요부분은 개발자모드에서도 안보임 */-->
+</body>
+</html>

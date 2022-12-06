@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- xml name space -->
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>링크</h1>
+	<ul>
+		<li><a th:href="@{/object}">Object로</a></li>
+		<li><a href="/object">Object로 th뺀거</a></li>
+		<li><a th:href="@{/object(param1=${param1}, param2=${param2})}">param확인</a></li>
+		<li><a
+			th:href="@{/object/{param1}/{param2}(param1=${param1},param2=${param2})}">URLPathVar</a></li>
+		<li><a
+			th:href="@{/object/{param1}(param1=${param1}, param2=${param2})}">Both</a></li>
+
+		<!-- 
+	/products
+	/product/30 <-product.id 가 넘어왔다
+	/product/30?option=soldout
+	/category/992 <- category.Number 가 넘어옴
+	/category/992/product/60
+	/category/992/product/60?level=5-->
+		<li><a th:href="@{/products}">/products</a></li>
+		<li><a
+			th:href="@{/product/{productId}(productId=${id},option=${option})">/product/30?option=soldout</a></li>
+		<li><a th:href="@{/product/{productId}(productId=${id})">/product/30
+		</a></li>
+		<li><a
+			th:href="@{/category/{categoryNumber}(categoryNumber=${category.number})">/category/992
+		</a></li>
+		<li><a
+			th:href="@{/category/{categoryNumber}/product/{productId}
+				(categoryNumber=${category.number}, productId=${product.id})">/category/992/product/60</a></li>
+
+		<li><a
+			th:href="@{/category/{categoryNumber}/product/{productId}/level/{level}
+				(categoryNumber=${category.number}, productId=${product.id},level=${level})">/category/992/product/60?level=5</a></li>
+	</ul>
+
+	<!--
+	/object?parameterqueryString=value @Requestparam 으로 받고
+	/object (Post -> Body) @RequestParam
+	/object/{param}/{value} @PathVariable -->
+
+</body>
+</html>

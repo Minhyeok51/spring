@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<script>
+		let itemName = [[${foodItem1.itemName}]];
+		let content = [[${foodItem1.content}]];
+		let price = [[${foodItem1.price}]];
+		
+		let itemName2 = /*[[${foodItem2.itemName}]]*/"itemName2";
+		
+		let foodItem=[[${foodItem2}]];
+	</script>
+
+	<script th:inline="javascript">/* th:inline="javascript"  붙여야 타임리프 코드 먹힌다.*/
+		let itemName = [[${foodItem1.itemName}]];
+		let content = [[${foodItem1.content}]];
+		let price = [[${foodItem1.price}]];
+		
+		let itemName2 = /*[[${foodItem2.itemName}]]*/"itemName2";
+		
+		let foodItem=[[${foodItem2}]];
+		
+		let foods = [[${foods}]];
+		[# th:each = "food, foodStat : ${foods}"]
+			let foodItem[[${foodsStat.count}]] = [[$food]];
+		[/]
+	</script>
+</body>
+</html>

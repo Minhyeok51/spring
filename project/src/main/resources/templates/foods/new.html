@@ -6,12 +6,16 @@
 </head>
 <body>
 	<h1>new FoodItem Page</h1>
-	
-	<form action="" method="post">
+										<!--th:object 오브젝트타입 설정해놓기  -->
+	<form action="" method="post" th:object="${foodItem}">
 		<div>
-			<label>ItemName<input type="text" name="itemName"></label>
-			<label>Content<input type="text" name="content"></label>
-			<label>Price<input type="number" name="price"></label>
+<!-- 			object안에있는 itemName ... th:field값이 name, id, value값 설정해줌-->
+			<label>ItemName<input type="text" name="originalItemName" th:field="*{itemName}"></label>
+			<label>Content<input type="text" name="originalContent" th:field="*{content}"></label>
+			<label>Price<input type="number" name="originalPrice" th:field="*{price}"></label>
+			<label>Soldout<input type="checkbox" id="soldout" th:field="*{soldout}"></label>
+			<!-- <label>Soldout<input type="checkbox" id="soldout" name="soldout"></label>
+			<input type="hidden" name="_soldout" value="on"/> -->
 		</div>
 		<div>
 			<button type="submit">추가하기</button>
