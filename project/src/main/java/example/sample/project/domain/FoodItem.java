@@ -18,6 +18,8 @@ public class FoodItem {
 	
 	private Boolean soldout;
 	private List<String> options;
+	private FoodType foodType;
+	private String shopCode; 
 	
 	public FoodItem() {}
 	public FoodItem(String itemName, String content, int price) {

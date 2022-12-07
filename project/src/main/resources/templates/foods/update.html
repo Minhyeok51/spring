@@ -15,6 +15,23 @@
 			<label>Price<input type="number" name="price" th:field="*{price}"></label>
 			<label>SoldOut<input type="checkbox" th:field="*{soldout}"></label>
 		</div>
+		
+		<div th:each="option : ${options}">
+			<input type="checkbox" th:field="*{options}" th:value="${option.key}"> 
+			<label th:for="${#ids.prev('options')}" th:text="${option.value}"></label>
+		</div>
+		
+		<div th:each="foodType : ${foodTypes}">
+			<input type="radio" th:field="*{foodType}" th:value="${foodType.name}">
+			<label th:for="${#ids.prev('foodType')}" th:text="${foodType.memo}"></label>
+		</div>
+		
+		<div>
+			<select th:field="*{shopCode}">
+				<option th:each="shopCode : ${shopCodes}" th:value="${shopCode.code}" th:text="${shopCode.name}"></option>
+			</select>
+		</div>
+		
 		<div>
 			<button type="submit">수정하기</button>
 			<button type="button" th:onclick="|location.href='@{/foods}'|">뒤로가기</button>

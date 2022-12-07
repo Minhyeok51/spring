@@ -34,9 +34,9 @@
 				</tr>
 				<tr th:each="food : ${foods}">	<!-- th:each 반복문이다 for문 같은 -->
 					<td><a th:href="@{|/foods/${food.id}|}"  th:text="${food.id}">3</a></td>
-					<td th:text="${food.itemName}">음식3</td>
-					<td th:text="${food.content}">재료3</td>
-					<td th:text="${food.price}">3000</td>
+					<td><a th:href="@{|/foods/${food.id}|}"  th:text="${food.itemName}">음식3</a></td>
+					<td><a th:href="@{|/foods/${food.id}|}"  th:text="${food.content}">재료3</a></td>
+					<td><a th:href="@{|/foods/${food.id}|}"  th:text="${food.price}">3000</a></td>
 				</tr>
 			</tbody>
 		</table>
@@ -44,6 +44,11 @@
 	
 	<div>
 		<button th:onclick="|location.href='@{/foods/new}'|" >신규등록</button>
+	</div>
+	
+	<div th:each="option : ${options}">
+		<p th:text="${option.key}"></p>
+		<p th:text="${option.value}"></p>
 	</div>
 </body>
 </html>

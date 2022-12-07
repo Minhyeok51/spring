@@ -45,6 +45,9 @@ public class FoodRepository {
 		targetFoodItem.setContent(foodItem.getContent());
 		targetFoodItem.setPrice(foodItem.getPrice());
 		targetFoodItem.setSoldout(foodItem.getSoldout());
+		targetFoodItem.setOptions(foodItem.getOptions());
+		targetFoodItem.setFoodType(foodItem.getFoodType());
+		targetFoodItem.setShopCode(foodItem.getShopCode());
 		result = true;
 		//FoodItem 필드추가
 		//화면에서 Input처리

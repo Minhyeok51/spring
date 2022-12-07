@@ -5,9 +5,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-		
+
 	<h1>FoodItem Detail 페이지</h1>
-	
+
 	<div>
 		<table>
 			<thead>
@@ -17,25 +17,55 @@
 					<th>FoodContent</th>
 					<th>FoodPrice</th>
 					<th>SoldOut</th>
+					<th>FoodOptions</th>
+					<th>FoodType</th>
+					<th>ShopCode</th>
 				</tr>
 			</thead>
-			
+
 			<tbody>
 				<tr>
 					<td th:text="${food.id}">3</td>
 					<td th:text="${food.itemName}">음식3</td>
 					<td th:text="${food.content}">재료3</td>
 					<td th:text="${food.price}">3000</td>
-					<td><input type="checkbox"  th:field="${food.soldout}" readonly="readonly" disabled></td>
+					<td><input type="checkbox" th:field="${food.soldout}"
+						readonly="readonly" disabled></td>
+					<td>
+						<div th:each="option : ${options}">
+							<input type="checkbox" th:field="*{food.options}" th:value="${option.key}" disabled> 
+							<label th:for="${#ids.prev('options')}" th:text="${option.value}"></label>
+						</div>
+					</td>
+					<td>
+						<div th:each="foodType : ${foodTypes}">
+							<input type="radio" th:field="*{food.foodType}" th:value="${foodType.name}" disabled>
+							<label th:for="${#ids.prev('foodType')}" th:text="${foodType.memo}"></label>
+						</div>
+					</td>
+					
+					<td>
+						<div>
+							<select th:field="${food.shopCode}" disabled>
+								<option th:each="shopCode : ${shopCodes}" th:value="${shopCode.code}" th:text="${shopCode.name}"></option>
+							</select>
+						</div>
+					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-	
-	<div>											
-							<!--{foodId}(foodId=${food.id}) -printf와 비슷 앞에 양식을 넣어두고 뒤에서 정의를 해줌  -->		
-		<button th:onclick="|location.href='@{/foods/update/{foodId}(foodId=${food.id})}'|" >수정하기</button>
-		<button th:onclick="|location.href='@{/foods}'|" >리스트</button>
+
+	<div>
+		<!--{foodId}(foodId=${food.id}) -printf와 비슷 앞에 양식을 넣어두고 뒤에서 정의를 해줌  -->
+		<button
+			th:onclick="|location.href='@{/foods/update/{foodId}(foodId=${food.id})}'|">수정하기</button>
+		<button th:onclick="|location.href='@{/foods}'|">리스트</button>
+	</div>
+
+	<div th:each="option : ${options}">
+		<p th:text="${option.key}"></p>
+		<p th:text="${option.value}"></p>
 	</div>
 </body>
 </html>
