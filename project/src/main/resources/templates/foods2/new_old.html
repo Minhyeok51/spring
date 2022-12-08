@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+.errormsg {
+	color: red;
+}
+</style>
+</head>
+<body>
+	<h1>new FoodItem Page</h1>
+	<!--th:object 오브젝트타입 설정해놓기  -->
+	<form action="" method="post" th:object="${foodItem}">
+		<div th:if="${errors?.containsKey('globalError')}">
+			<div class="errormsg" th:text="${errors['globalError']}"></div>
+		</div>
+		<div>
+			<!-- 			object안에있는 itemName ... th:field값이 name, id, value값에도 설정됨-->
+			<label>ItemName<input type="text" name="originalItemName"
+				th:field="*{itemName}"></label>
+			<div th:if="${errors?.containsKey('itemName')}">
+				<!-- ?의 의미는 있을수도 있고 없을수도 있다는 뜻. -->
+				<div class="errormsg" th:text="${errors['itemName']}"></div>
+			</div>
+			<label>Content<input type="text" name="originalContent"
+				th:field="*{content}"></label>
+			<div th:if="${errors?.containsKey('content')}">
+				<div class="errormsg" th:text="${errors['content']}"></div>
+			</div>
+			<label>Price<input type="number" name="originalPrice"
+				th:field="*{price}"  th:class="${errors?.containsKey('price')} ? 'errormsg':_"></label>
+			<div th:if="${errors?.containsKey('price')}">							<!--   _는 아무것도 안한다는 뜻  -->
+				<div class="errormsg" th:text="${errors['price']}"></div>
+			</div>
+			<label>Soldout<input type="checkbox" id="soldout"
+				th:field="*{soldout}"></label>
+			<!-- <label>Soldout<input type="checkbox" id="soldout" name="soldout"></label>
+			<input type="hidden" name="_soldout" value="on"/> -->
+		</div>
+		<div th:each="option : ${options}">
+			<input type="checkbox" th:field="*{options}" th:value="${option.key}">
+			<label th:for="${#ids.prev('options')}" th:text="${option.value}"></label>
+		</div>
+		<div th:each="foodType : ${foodTypes}">
+			<input type="radio" th:field="*{foodType}"
+				th:value="${foodType.name}"> <label
+				th:for="${#ids.prev('foodType')}" th:text="${foodType.memo}"></label>
+		</div>
+		<div>
+			<select th:field="*{shopCode}">
+				<option th:each="shopCode : ${shopCodes}"
+					th:value="${shopCode.code}" th:text="${shopCode.name}"></option>
+			</select>
+		</div>
+		<div>
+			<button type="submit">추가하기</button>
+			<button type="button" th:onclick="|location.href='@{/foods}'|">뒤로가기</button>
+		</div>
+
+	</form>
+	<div th:each="option : ${options}">
+		<p th:text="${option.key}"></p>
+		<p th:text="${option.value}"></p>
+	</div>
+</body>
+</html>

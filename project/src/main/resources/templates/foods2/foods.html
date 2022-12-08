@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<a href="/foods2">food2페이지</a>
+	</div>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>FoodId</th>
+					<th>FoodItemName</th>
+					<th>FoodContent</th>
+					<th>FoodPrice</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>음식1</td>
+					<td>재료1</td>
+					<td>1000</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>음식2</td>
+					<td>재료2</td>
+					<td>2000</td>
+				</tr>
+				<tr th:each="food : ${foods}">	<!-- th:each 반복문이다 for문 같은 -->
+					<td><a th:href="@{|/foods2/${food.id}|}"  th:text="${food.id}">3</a></td>
+					<td><a th:href="@{|/foods2/${food.id}|}"  th:text="${food.itemName}">음식3</a></td>
+					<td><a th:href="@{|/foods2/${food.id}|}"  th:text="${food.content}">재료3</a></td>
+					<td><a th:href="@{|/foods2/${food.id}|}"  th:text="${food.price}">3000</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<div>
+		<button th:onclick="|location.href='@{/foods2/new}'|" >신규등록</button>
+	</div>
+	
+	<div th:each="option : ${options}">
+		<p th:text="${option.key}"></p>
+		<p th:text="${option.value}"></p>
+	</div>
+</body>
+</html>

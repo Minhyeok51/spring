@@ -3,22 +3,21 @@ package example.sample.project.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import example.sample.project.domain.FoodItem;
 
+@Repository //선언하면 싱글톤 만드는 과정(코드)필요없음
 public class FoodRepository {
 	private static List<FoodItem> db = new ArrayList<>();
-//	private List<DemoUnit> db;
 	private static int seq = 1;
-	private static final FoodRepository instance = new FoodRepository();
-//	static -class레벨이다
-	public static FoodRepository getInstance() {
-//		DemoUnitArrRepository instance = new DemoUnitArrRepository(); 이렇게 되면 싱글톤이 깨지는것 
-		return instance;
-	}
 	
-	private FoodRepository() {
-//		db = new ArrayList<>(); //new 할때마다 db 내용 날라가니까 그렇게 하지 못하게 하기 위해
-	}
+//	private static final FoodRepository instance = new FoodRepository();
+//	public static FoodRepository getInstance() {
+//		return instance;
+//	}
+//	private FoodRepository() {
+//	}
 	public FoodItem insert(FoodItem foodItem) {
 		foodItem.setId(seq++);
 		db.add(foodItem);

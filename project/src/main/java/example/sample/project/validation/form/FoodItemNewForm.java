@@ -1,20 +1,20 @@
-package example.sample.project.domain;
+package example.sample.project.validation.form;
 
 import java.util.List;
 
 import org.hibernate.validator.constraints.Range;
 
+import example.sample.project.domain.FoodType;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Data
-public class FoodItem {
+public class FoodItemNewForm {
 	private int id;
+	
+	//FoodItemNewForm, FoodItemUpdateForm
+	//FoodItemForm
+	
 //	@NotBlank(message="입력좀...") errors.properties에 적을수도 있다
 	@NotBlank
 	private String itemName;
@@ -28,8 +28,8 @@ public class FoodItem {
 	private FoodType foodType;
 	private String shopCode; 
 	
-	public FoodItem() {}
-	public FoodItem(String itemName, String content, int price) {
+	public FoodItemNewForm() {}
+	public FoodItemNewForm(String itemName, String content, int price) {
 		super();
 		this.itemName = itemName;
 		this.content = content;

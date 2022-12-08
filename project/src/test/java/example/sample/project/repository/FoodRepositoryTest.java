@@ -3,11 +3,13 @@ package example.sample.project.repository;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import example.sample.project.domain.FoodItem;
 
 public class FoodRepositoryTest {
-	FoodRepository foodRepository = FoodRepository.getInstance();
+	@Autowired
+	FoodRepository foodRepository;
 	
 	@Test
 	void updateTest() {
