@@ -9,12 +9,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import example.sample.project.domain.Member;
+import example.sample.project.repository.MemberRepository;
 import example.sample.project.validation.form.LoginForm;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 public class LoginController {
+	
+	private final MemberRepository memberRepository;
 	
 	@GetMapping("/login")
 	public String login(Model model) {
@@ -31,11 +37,14 @@ public class LoginController {
 		
 		validateLoginForm(loginForm, bindingResult);
 		
-		//if()
+		Member member = memberRepository.selectByLoginId(loginForm.getLoginId());
+		if(member.getLoginId().equals(loginForm.getLoginId()) 
+				&& member.getPassword().equals(loginForm.getPassword())) {
+			return "redirect:/";
+		}
+			return "redirect:/login/login";
+		}
 		
-		return "";
-	}
-	
 	public void validateLoginForm(LoginForm loginForm,Errors errors) {
 		if(!StringUtils.hasText(loginForm.getLoginId())) {
 			errors.rejectValue("loginId", null, "아이디 필수 입력");
