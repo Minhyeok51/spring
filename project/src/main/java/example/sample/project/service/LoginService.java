@@ -12,13 +12,24 @@ public class LoginService {
 
 	private final MemberRepository memberRepository;
 	
-	public Member login(String loginId,String password) {
+	public Member login(String loginId, String password) {
 		Member member = memberRepository.selectByLoginId(loginId);
+		
+//		if(member == null) {
+//			return null;
+//		} else {
+//			if(member.getPassword().equals(password)) {
+//				return member;
+//			}
+//		}
+//		return null;
+		
 		if(member != null) {
 			if(member.getPassword().equals(password)) {
 				return member;
 			}
 		}
+		
 		return null;
 	}
 }

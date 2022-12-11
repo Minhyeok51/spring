@@ -25,10 +25,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import example.sample.project.domain.FoodItem;
 import example.sample.project.domain.FoodType;
+import example.sample.project.domain.Member;
 import example.sample.project.domain.ShopCode;
 import example.sample.project.repository.FoodRepository;
+import example.sample.project.session.SessionManager;
+import example.sample.project.session.SessionVar;
 import example.sample.project.validation.FoodItemValidator;
 import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,7 +45,6 @@ public class FoodController {
 	//	private final FoodRepository foodRepository = FoodRepository.getInstance();
 	private final FoodRepository foodRepository;
 	private final FoodItemValidator foodItemValidator;
-
 	//	@Autowired //final을 생략해야 가능
 	//	private FoodItemValidator foodItemValidator;
 
@@ -52,7 +56,26 @@ public class FoodController {
 
 
 	@GetMapping
-	public String foods(Model model) {
+	public String foods(Model model,HttpServletRequest req) {
+		//로그인 했는지? 했으면 진행
+		//안했으면 redirect: "/" 
+//		HttpSession session = req.getSession(false); 이 페이지만 걸리기 때문에 다른곳은 로긴 안되도 접속이됨
+		
+		//필터, 인터셉터
+		// A || B - A가 참이거나 B가 참이거나 A가 참이면 뒤에 B보지도 않고 참으로 된다 A가 거짓이면 그때 B도본다
+		// A && B - A와 B둘다 참 , A가 거짓이면 뒤에꺼 보지도 않음
+		
+		//memberId ?가 있냐없냐
+//		if(session == null || session.getAttribute(SessionVar.LOGIN_MEMBER) == null) {//로그인이 안된사람
+//			return "redirect:/";
+//		} 이 페이지만 걸리기 때문에 다른곳은 로긴 안되도 접속이됨
+		
+		//memberId = Member.? Member객체 안에 있냐없냐
+//		Member member = (Member)session.getAttribute(SessionVar.LOGIN_MEMBER);
+//		if(member == null) {
+//			return "redirect:/";
+//		}이 페이지만 걸리기 때문에 다른곳은 로긴 안되도 접속이됨
+		//-------------데이터 읽어서 화면 전달----------
 		List<FoodItem> foodList = foodRepository.selectAll();
 
 		model.addAttribute("foods", foodList);

@@ -10,6 +10,10 @@
 		
 		<form action="" method="post" th:object="${loginForm}">
 			
+			<div th:if="${#fields.hasGlobalErrors()}">
+				<p th:each="error : ${#fields.globalErrors}" th:text="${error}">글로벌오류</p>
+			</div>
+			
 			<label for="loginId">ID</label>
 			<input type="text" th:field="*{loginId}">
 			<div th:errors="*{loginId}"></div>
