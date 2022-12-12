@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="example.sample.project.repository.mybatis.MemberMapper">
+
+<insert id="insert" parameterType="Member">
+	insert into member(id, login_id, password, name)
+		values(memberPK.nextVal, #{loginId}, #{password}, #{name})
+</insert>
+<select id="selectById" resultType="Member">
+	select id, login_id, password, name
+	from member
+	where id = #{id}
+</select>
+<select id="selectByLoginId" resultType="Member">
+	select id, login_id, password, name
+	from member
+	where login_id = #{loginId}
+</select>
+<select id="selectAll" resultType="Member">
+	select *
+	from member
+</select>
+<delete id="deleteAll">
+	delete from member
+</delete>
+
+</mapper>

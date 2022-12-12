@@ -25,7 +25,7 @@ public class SampleRestController {
 		log.info("log Info");
 		//Trace 부터 아래쪽으로 갈수록 더 심각한거.
 		log.trace("checkRestLog Trace");
-		logger.debug("checkRestLog Debug ㅁㄴ암ㅇ느ㅏㅁㅇ나ㅡ");
+		logger.debug("checkRestLog Debug");
 		logger.info("checkRestLog Info");
 		logger.warn("checkRestLog Warn");
 		logger.error("checkRestLog Error");

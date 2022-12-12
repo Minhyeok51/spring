@@ -8,6 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import example.sample.project.domain.Member;
 import example.sample.project.service.LoginService;
@@ -40,6 +41,36 @@ public class LoginController {
 	
 	@PostMapping("/login")
 	public String doLogin(@ModelAttribute LoginForm loginForm,
+			BindingResult bindingResult, HttpServletResponse resp
+			, HttpServletRequest req
+			,@RequestParam(name="redirectURL", defaultValue="/") String redirectURL) {
+		log.info("loginForm {}", loginForm);
+		
+		validateLoginForm(loginForm, bindingResult);
+		
+		if(bindingResult.hasErrors()) {
+			return "login/login";
+		}
+	 	Member member = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
+	 	log.info("login {}", member);
+	 	
+	 	if(member == null) { //계정정보가 없거나, 비밀번호가 안맞거나 로그인 실패
+	 		bindingResult.reject("loginForm", "아이디 or 비밀번호 불일치");
+	 		return "login/login";
+	 	}
+	 	//정상적으로 로그인 처리가 된 경우
+	 	//세션에 추가
+//	 	sessionManager.create(member, resp);
+	 	HttpSession session = req.getSession(); 
+	 	//getSession - session이 있으면 가져오고 없으면 새로 만들어줌
+//	 	session.setMaxInactiveInterval(540); //유효시간 540초
+	 	session.setAttribute(SessionVar.LOGIN_MEMBER, member);
+		
+		return "redirect:" +redirectURL; //입력값이 없으면 "/",있으면 ex)"/foods/new"
+	}
+	
+	@PostMapping("/login_old")
+	public String doLogin_old(@ModelAttribute LoginForm loginForm,
 			BindingResult bindingResult, HttpServletResponse resp
 			, HttpServletRequest req) {
 		log.info("loginForm {}", loginForm);

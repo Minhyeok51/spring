@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import example.sample.project.domain.Member;
-import example.sample.project.repository.MemberRepository;
+import example.sample.project.repository.ListMemberRepository;
+import example.sample.project.repository.mybatis.MybatisMemberRepository;
 import example.sample.project.validation.MemberValidator;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,9 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class MemberController {
 	
-	private final MemberRepository memberRepository;
+//	private final ListMemberRepository memberRepository;
+	private final MybatisMemberRepository memberRepository;
+	
 	private final MemberValidator memberValidator; 
 	@GetMapping("/new")
 	public String newMember(Model model) {
@@ -44,25 +47,25 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	@PostConstruct
-	public void init() {
-		Member member = new Member();
-		member.setLoginId("admin");
-		member.setPassword("admin");
-		member.setName("관리자");
-		
-		Member member2 = new Member();
-		member2.setLoginId("user1");
-		member2.setPassword("user1");
-		member2.setName("사용자1");
-		
-		Member member3 = new Member();
-		member3.setLoginId("user2");
-		member3.setPassword("user2");
-		member3.setName("사용자2");
-		
-		memberRepository.insert(member);
-		memberRepository.insert(member2);
-		memberRepository.insert(member3);
-	}
+//	@PostConstruct
+//	public void init() {
+//		Member member = new Member();
+//		member.setLoginId("admin");
+//		member.setPassword("admin");
+//		member.setName("관리자");
+//		
+//		Member member2 = new Member();
+//		member2.setLoginId("user1");
+//		member2.setPassword("user1");
+//		member2.setName("사용자1");
+//		
+//		Member member3 = new Member();
+//		member3.setLoginId("user2");
+//		member3.setPassword("user2");
+//		member3.setName("사용자2");
+//		
+//		memberRepository.insert(member);
+//		memberRepository.insert(member2);
+//		memberRepository.insert(member3);
+//	}
 }

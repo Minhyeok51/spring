@@ -1,12 +1,16 @@
-package example.sample.project.repository;
+package example.sample.project.repository.mybatis;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import example.sample.project.domain.Member;
 
-public interface MemberRepository {
-	
-	public Member insert(Member member);
+@Mapper
+public interface MemberMapper {
+
+	//선언부만 남겨놓기
+	public Integer insert(Member member);
 
 	public Member selectById(int id);
 
