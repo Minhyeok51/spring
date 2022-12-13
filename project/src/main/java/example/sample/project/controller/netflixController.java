@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import example.sample.project.domain.FoodItem;
 import example.sample.project.domain.Movie;
-import example.sample.project.repository.FoodRepository;
 import example.sample.project.repository.MovieRepository;
 import lombok.extern.slf4j.Slf4j;
 

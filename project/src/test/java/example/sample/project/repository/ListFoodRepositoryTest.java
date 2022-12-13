@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import example.sample.project.domain.FoodItem;
 
-public class FoodRepositoryTest {
+public class ListFoodRepositoryTest {
 	@Autowired
-	FoodRepository foodRepository;
+	ListFoodRepository foodRepository;
 	
 	@Test
 	void updateTest() {

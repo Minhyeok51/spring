@@ -24,16 +24,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import example.sample.project.domain.FoodItem;
+import example.sample.project.domain.FoodItemCond;
 import example.sample.project.domain.FoodType;
-import example.sample.project.domain.Member;
 import example.sample.project.domain.ShopCode;
 import example.sample.project.repository.FoodRepository;
-import example.sample.project.session.SessionManager;
-import example.sample.project.session.SessionVar;
 import example.sample.project.validation.FoodItemValidator;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,6 +40,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/foods")
 public class FoodController {
 	//	private final FoodRepository foodRepository = FoodRepository.getInstance();
+//	private final ListFoodRepository foodRepository;
 	private final FoodRepository foodRepository;
 	private final FoodItemValidator foodItemValidator;
 	//	@Autowired //final을 생략해야 가능
@@ -53,7 +51,25 @@ public class FoodController {
 	//	public FoodController(FoodItemValidator foodItemValidator) {
 	//		this.foodItemValidator = foodItemValidator;
 	//	}
+	
+	@GetMapping("/searchAll")
+	public String foodsSearchAll(Model model,HttpServletRequest req) {
+		FoodItemCond searchCond = new FoodItemCond();
+//		searchCond.setId(7);
+//		searchCond.setItemName("김밥");
+//		searchCond.setContent("1");
+//		searchCond.setPrice(20000);
+		List<Integer> ids = new ArrayList<Integer>();
+		ids.add(7);
+		ids.add(8);
+		ids.add(13);
+		searchCond.setIds(ids);
+		List<FoodItem> foodList = foodRepository.selectSearchAll(searchCond);
 
+		model.addAttribute("foods", foodList);
+		return "foods/foods";
+	}
+	
 
 	@GetMapping
 	public String foods(Model model,HttpServletRequest req) {
@@ -346,7 +362,7 @@ public class FoodController {
 		return shopCodes;
 	}
 
-	@PostConstruct //생성자 불린후 그 다음에 밑에 메소드 실행해 주는 어노테이션
+//	@PostConstruct //생성자 불린후 그 다음에 밑에 메소드 실행해 주는 어노테이션
 	public void insertInit() {
 		FoodItem foodItem1 = new FoodItem("김밥", "돈가스", 3500);
 		foodRepository.insert(foodItem1);

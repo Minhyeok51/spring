@@ -24,6 +24,7 @@ import example.sample.project.domain.FoodItem;
 import example.sample.project.domain.FoodType;
 import example.sample.project.domain.ShopCode;
 import example.sample.project.repository.FoodRepository;
+import example.sample.project.repository.ListFoodRepository;
 import example.sample.project.validation.form.FoodItemNewForm;
 import example.sample.project.validation.form.UpdateCheck;
 import jakarta.annotation.PostConstruct;
@@ -36,8 +37,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/foods2")
 public class FoodController2 {
 	//	private final FoodRepository foodRepository = FoodRepository.getInstance();
+//	private final ListFoodRepository foodRepository;
 	private final FoodRepository foodRepository;
-
 	//	@Autowired //final을 생략해야 가능
 	//	private FoodItemValidator foodItemValidator;
 
@@ -239,7 +240,7 @@ public class FoodController2 {
 			, @ModelAttribute FoodItem foodItem) {
 		log.info("/update/{}",foodId);
 		log.info(foodItem.toString());
-		foodRepository.update(foodId, foodItem);
+//		foodRepository.update(foodId, foodItem);
 
 		return "redirect:/foods2/{foodId}";
 	}
@@ -272,7 +273,7 @@ public class FoodController2 {
 		return shopCodes;
 	}
 
-	@PostConstruct //생성자 불린후 그 다음에 밑에 메소드 실행해 주는 어노테이션
+//	@PostConstruct //생성자 불린후 그 다음에 밑에 메소드 실행해 주는 어노테이션
 	public void insertInit() {
 		FoodItem foodItem1 = new FoodItem("김밥", "돈가스", 3500);
 		foodRepository.insert(foodItem1);

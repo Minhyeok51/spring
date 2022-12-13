@@ -6,10 +6,10 @@ import org.apache.ibatis.annotations.Mapper;
 
 import example.sample.project.domain.Member;
 
-@Mapper
+@Mapper //mybatis용도로 사용하는 부분
 public interface MemberMapper {
 
-	//선언부만 남겨놓기
+	//선언부만 남겨놓기 
 	public Integer insert(Member member);
 
 	public Member selectById(int id);
