@@ -3,6 +3,7 @@ package example.sample.project.repository.mybatis;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import example.sample.project.domain.FoodItem;
 import example.sample.project.domain.FoodItemCond;
@@ -18,15 +19,25 @@ public class MybatisFoodRepository implements FoodRepository{
 	private final FoodItemMapper foodItemMapper;
 	
 	@Override
+	@Transactional
 	public FoodItem insert(FoodItem foodItem) {
 		Integer result = foodItemMapper.insert(foodItem);
 		log.info("FoodItem insert result {}", result);
+		
+		for(String options : foodItem.getOptions()) { //options가 리스트로 되어있어서 포문으로 돌림
+		foodItemMapper.insertFoodItemOptions(foodItem.getId(),options);
+		}
 		return foodItem;
 	}
 
 	@Override
 	public FoodItem selectById(int id) {
-		FoodItem foodItem = foodItemMapper.selectById(id);
+//		FoodItem foodItem = foodItemMapper.selectById(id);
+		FoodItem foodItem = foodItemMapper.selectByIdWithOptions(id);
+		log.info("foodItem {}", foodItem);
+		
+//		List<String> options = foodItemMapper.selectFoodItemOptions(id);
+//		foodItem.setOptions(options);
 		return foodItem;
 	}
 
@@ -37,9 +48,18 @@ public class MybatisFoodRepository implements FoodRepository{
 	}
 
 	@Override
+	@Transactional
 	public boolean update(int id, FoodItem foodItem) {
 		boolean result = false;
 		try {
+			//해당 id options 한번 삭제
+			foodItemMapper.deleteFoodItemOptions(id);
+			log.info("foodItem delete options {}", foodItem);
+			
+			//id options 다시 insert
+			for(String options : foodItem.getOptions()) {
+				foodItemMapper.insertFoodItemOptions(foodItem.getId(),options);
+				}
 			foodItemMapper.update(id, foodItem);
 			result = true;
 		}catch (Exception e) {

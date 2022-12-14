@@ -5,25 +5,58 @@
 
 <mapper
 	namespace="example.sample.project.repository.mybatis.FoodItemMapper">
-
+	
+	<resultMap type="FoodItem" id="foodItemMap">
+		<id property="id" column="id"/>
+		<result property="itemName" column="itemName"/>
+		<result property="content" column="content"/>
+		<result property="price" column="price"/>
+		<result property="soldout" column="soldout"/>
+		<result property="foodType" column="foodType"/>
+		<collection property="options" column="id" select="selectFoodItemOptions"></collection>
+<!-- column="id" select="selectFoodItemOptions" id값을 가지고 selectFoodItemOptions를 실행 한 결과를 
+FoodItem에 담겠다-->
+	</resultMap>
+	
 	<insert id="insert" parameterType="FoodItem">
 		<selectKey keyProperty="id" resultType="java.lang.Integer"
 			order="BEFORE">
 			select foodPK.nextVal as id from dual
 		</selectKey>
-		insert into foodItem(id, itemName, content, price)
+		insert into foodItem(id, itemName, content, price, soldout, foodType, shopCode)
 		values(#{id},
-		#{itemName}, #{content}, #{price})
+		#{itemName}, #{content}, #{price}, #{soldout}, #{foodType}, #{shopCode})
 	</insert>
-
-	<select id="selectById" resultType="FoodItem">
-		select id, itemName, content, price
+	
+	<select id="selectByIdWithOptions" resultMap="foodItemMap"><!--위에 resultMap과 연결되는 부분 -->
+		select id, itemName, content, price, soldout, foodType, shopCode
 		from foodItem
 		where id = #{id}
 	</select>
-
+	
+	<insert id="insertFoodItemOptions">
+		insert into foodItemOptions (foodId, options)
+			values (#{id}, #{options})
+	</insert>
+	
+	<delete id="deleteFoodItemOptions">
+		delete from foodItemOptions
+		where foodid=#{id}
+	</delete>
+	
+	<select id="selectById" resultType="FoodItem">
+		select id, itemName, content, price, soldout, foodType, shopCode
+		from foodItem
+		where id = #{id}
+	</select>
+	
+	<select id="selectFoodItemOptions" resultType="String">
+		select options from foodItemOptions
+		where foodid =#{id}
+	</select>
+	
 	<select id="selectAll" resultType="FoodItem">
-		select *
+		select id, itemName, content, price, soldout, foodType, shopCode
 		from foodItem
 		order by id
 	</select>
@@ -35,7 +68,7 @@
 		content like '%'||#{content}||'%' </if> order by id </select> -->
 
 	<select id="selectSearchAll" resultType="FoodItem">
-		select id, itemName, content, price
+		select id, itemName, content, price, soldout, foodType, shopCode
 		from foodItem
 		<where>
 			id IN
@@ -52,8 +85,9 @@
 			<if test="content != null">
 				AND content like '%'||#{content}||'%'
 			</if>
-			<if test="price != null and price &lt;= 10000">
-				AND price >= #{price}
+			<if test="price != null and price lt 10000">
+			<!--<![CDATA[AND price <= #{price}]]>  --> <!-- 부등호 쓸거면 이 안에서 써야함 -->
+				AND price &lt; #{price} <!-- &lt; &gt;-->
 			</if>
 		</where>
 		order by id
@@ -80,7 +114,10 @@
 		update foodItem
 		set itemName = #{updateItem.itemName},
 		content = #{updateItem.content},
-		price = #{updateItem.price}
+		price = #{updateItem.price},
+		soldout = #{updateItem.soldout},
+		foodType = #{updateItem.foodType},
+		shopCode = #{updateItem.shopCode}
 		where id= #{id}
 	</update>
 

@@ -242,7 +242,7 @@ public class FoodController {
 		return "redirect:/foods/{foodId}";
 	}
 
-	@InitBinder
+//	@InitBinder
 	public void init(WebDataBinder dataBinder) {
 		dataBinder.addValidators(foodItemValidator);
 		//밑에 @Validated 붙은 것과 연결
