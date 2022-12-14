@@ -86,7 +86,7 @@ FoodItem에 담겠다-->
 				AND content like '%'||#{content}||'%'
 			</if>
 			<if test="price != null and price lt 10000">
-			<!--<![CDATA[AND price <= #{price}]]>  --> <!-- 부등호 쓸거면 이 안에서 써야함 -->
+			<!-- <![CDATA[AND price <= #{price}]]>  --> <!-- 부등호 쓸거면 이 안에서 써야함 -->
 				AND price &lt; #{price} <!-- &lt; &gt;-->
 			</if>
 		</where>
