@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LogInterceptor implements HandlerInterceptor{
 
-	
+	//전에 수행
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 
@@ -23,6 +23,7 @@ public class LogInterceptor implements HandlerInterceptor{
 		return true;//계속 진행
 	}
 	
+	//후에 수행
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			@Nullable ModelAndView modelAndView) throws Exception {
 		log.info("LogInterceptor postHandle");
@@ -34,6 +35,7 @@ public class LogInterceptor implements HandlerInterceptor{
 			@Nullable Exception ex) throws Exception {
 		log.info("LogInterceptor afterCompletion");
 		log.info("test {}", request.getAttribute("test"));
+		log.info("getDispatcherType {}",request.getDispatcherType());
 		if(ex != null) {
 			log.error("LogInterceptor afterCompletion Exception", ex);
 		}

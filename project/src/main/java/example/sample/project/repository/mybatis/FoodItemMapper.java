@@ -15,6 +15,8 @@ public interface FoodItemMapper {
 	
 	public Integer insertFoodItemOptions(@Param("id") int id, @Param("options") String options);
 	
+	public Integer insertFoodItemOptionsList(@Param("id") int id, @Param("options") List<String> options);
+	
 	public FoodItem selectById(int id) ;
 	
 	public FoodItem selectByIdWithOptions(int id) ;

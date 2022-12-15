@@ -52,6 +52,11 @@ public class FoodController {
 	//		this.foodItemValidator = foodItemValidator;
 	//	}
 	
+	@GetMapping("/doError")
+	public void doError() {
+		throw new RuntimeException("doError");
+	}
+	
 	@GetMapping("/searchAll")
 	public String foodsSearchAll(Model model,HttpServletRequest req) {
 		FoodItemCond searchCond = new FoodItemCond();

@@ -24,9 +24,10 @@ public class MybatisFoodRepository implements FoodRepository{
 		Integer result = foodItemMapper.insert(foodItem);
 		log.info("FoodItem insert result {}", result);
 		
-		for(String options : foodItem.getOptions()) { //options가 리스트로 되어있어서 포문으로 돌림
-		foodItemMapper.insertFoodItemOptions(foodItem.getId(),options);
-		}
+//		for(String options : foodItem.getOptions()) { //options가 리스트로 되어있어서 포문으로 돌림
+//		foodItemMapper.insertFoodItemOptions(foodItem.getId(),options);
+//		} //-->insertFoodItemOptionsList으로 대체
+		foodItemMapper.insertFoodItemOptionsList(foodItem.getId(),foodItem.getOptions());
 		return foodItem;
 	}
 
@@ -57,9 +58,11 @@ public class MybatisFoodRepository implements FoodRepository{
 			log.info("foodItem delete options {}", foodItem);
 			
 			//id options 다시 insert
-			for(String options : foodItem.getOptions()) {
-				foodItemMapper.insertFoodItemOptions(foodItem.getId(),options);
-				}
+//			for(String options : foodItem.getOptions()) {
+//				foodItemMapper.insertFoodItemOptions(id,options);
+//				}    //-->insertFoodItemOptionsList으로 대체
+			foodItemMapper.insertFoodItemOptionsList(id, foodItem.getOptions());
+
 			foodItemMapper.update(id, foodItem);
 			result = true;
 		}catch (Exception e) {

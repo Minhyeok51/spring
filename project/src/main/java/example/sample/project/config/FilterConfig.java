@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 import example.sample.project.filter.LogFilter;
 import example.sample.project.filter.LoginFilter;
+import jakarta.servlet.DispatcherType;
 import jakarta.servlet.Filter;
 
 @Configuration
@@ -18,8 +19,9 @@ public class FilterConfig {
 		filterRegistrationBean.setFilter(new LogFilter());
 		filterRegistrationBean.setOrder(1); //필터 순서 잡아두기
 		filterRegistrationBean.addUrlPatterns("/*");
+		filterRegistrationBean.setDispatcherTypes(DispatcherType.REQUEST, DispatcherType.ERROR);
 		return filterRegistrationBean;
-	}
+	}// WAS -> Filter -> Servlet -> Interceptor ->Controller 순으로 들어감
 	
 //	@Bean
 	public FilterRegistrationBean<Filter> loginFilter(){

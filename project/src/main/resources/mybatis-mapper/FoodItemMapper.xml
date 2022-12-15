@@ -39,6 +39,20 @@ FoodItem에 담겠다-->
 			values (#{id}, #{options})
 	</insert>
 	
+	<insert id="insertFoodItemOptionsList">
+		<foreach collection="options" item="item" open="insert All" 
+		close="select * from dual" separator=" ">
+			INTO foodItemOptions VALUES(#{id}, #{item})
+		</foreach>
+	</insert>
+	<!-- 
+	insert All
+	INTO foodItemOptions VALUES(#{id}, #{item})
+	INTO foodItemOptions VALUES(#{id}, #{item})
+	INTO foodItemOptions VALUES(#{id}, #{item})
+	select * from dual
+	 -->
+	 
 	<delete id="deleteFoodItemOptions">
 		delete from foodItemOptions
 		where foodid=#{id}
@@ -71,8 +85,7 @@ FoodItem에 담겠다-->
 		select id, itemName, content, price, soldout, foodType, shopCode
 		from foodItem
 		<where>
-			id IN
-			<foreach item="id" index="index" collection="ids" open="(" separator="," close=")">
+			<foreach item="id" index="index" collection="ids" open="id IN (" separator="," close=")">
 				#{id}
 			</foreach>
 			<if test="id != null">

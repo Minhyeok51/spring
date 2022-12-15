@@ -21,8 +21,15 @@ public class LogFilter implements Filter{
 		String uri = req.getRequestURI();
 		
 		log.info("Request {}", uri);
+		try{
+		log.info("dispatcherType {}", req.getDispatcherType());
 		chain.doFilter(request, response);
 		log.info("Response {}", uri);
+		}catch(Exception e) {
+			throw e;
+		}finally {
+			log.info("dispatcherType {}", req.getDispatcherType());
+		}
 	}
 	public void init(FilterConfig filterConfig) throws ServletException {
 		log.info("init");
