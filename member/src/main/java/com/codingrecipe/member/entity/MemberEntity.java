@@ -18,7 +18,7 @@ import lombok.Setter;
 @Table(name = "member_table")
 public class MemberEntity {
 	@Id //pk지정
-	@GeneratedValue(strategy = GenerationType.AUTO) //auto_increment 오라클의 시퀀스 지정
+	@GeneratedValue(strategy = GenerationType.AUTO) //auto_increment 오라클의 시퀀스 지정 GenerationType.IDENTITY
 	private Long id;
 	
 	@Column(unique = true, name="member_email") // unique 제약조건 추가
@@ -31,6 +31,7 @@ public class MemberEntity {
 	private String memberName;
 	
 	public static MemberEntity toMemberEntity(MemberDTO memberDTO) {
+		//dto를 entity형식으로 변환하는 메소드
 		MemberEntity memberEntity = new MemberEntity();
 		memberEntity.setMemberEmail(memberDTO.getMemberEmail());
 		memberEntity.setMemberPassword(memberDTO.getMemberPassword());
@@ -38,4 +39,13 @@ public class MemberEntity {
 		return memberEntity;
 	}
 	
+	public static MemberEntity toUpdateMemberEntity(MemberDTO memberDTO) {
+		//dto를 entity형식으로 변환하는 메소드
+		MemberEntity memberEntity = new MemberEntity();
+		memberEntity.setId(memberDTO.getId());
+		memberEntity.setMemberEmail(memberDTO.getMemberEmail());
+		memberEntity.setMemberPassword(memberDTO.getMemberPassword());
+		memberEntity.setMemberName(memberDTO.getMemberName());
+		return memberEntity;
+	}
 }
